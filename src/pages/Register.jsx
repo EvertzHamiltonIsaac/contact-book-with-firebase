@@ -38,7 +38,7 @@ const Register = () => {
             <input type="password" name='password' id='Idpassword' placeholder='enter your password' onChange={handleChange}/>
         </div>
         <div className="form__btn">
-            <button>Register</button>
+            <button>Sign Up</button>
         </div>
     </form>
   )

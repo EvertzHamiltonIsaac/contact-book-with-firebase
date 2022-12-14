@@ -1,12 +1,15 @@
 import React from 'react'
 import { Navigate, Outlet } from 'react-router-dom'
+import { useAuth } from '../context/AuthContext'
 
-const ProtectedRoutes = ({isLogged}) => {
-    if (isLogged) {
-        return <Outlet />
-    } else {
-        return <Navigate to='/login' />
-    }                     
+const ProtectedRoutes = () => {
+    const {user} = useAuth()
+    
+    if (!user) {
+        return <Navigate to='/SignIn' />
+    }     
+
+    return <Outlet />
 }
 
 export default ProtectedRoutes
