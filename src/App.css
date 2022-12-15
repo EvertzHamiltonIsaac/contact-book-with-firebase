@@ -6,3 +6,14 @@
     justify-content: center;
     align-items: center;
 }
+
+.modal__container{
+    width: 100%;
+    min-height: 100vh;
+    background-color: #0003;
+    backdrop-filter: blur(2px);
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+}

@@ -2,9 +2,10 @@ import { ref, set, update, remove, onValue } from 'firebase/database'
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { uid } from 'uid'
+import ModalCreate from '../components/ModalCreate'
 import { useAuth } from '../context/AuthContext'
 import { database } from '../firebase/firebase'
-
+import '../styles/home.css'
 
 const Home = () => {
 
@@ -23,6 +24,8 @@ const Home = () => {
   const [lastName, setLastName] = useState("")
   const [email, setEmail] = useState("")
   //fields
+
+  const [openModal, setOpenModal] = useState(false)
 
   //handleToChanges
   const handleToChangeFirstName = (e) => {
@@ -49,7 +52,9 @@ const Home = () => {
     setFirstName("");
     setLastName("");
     setEmail("");
+    setOpenModal(false);
   }
+
   //Read
   useEffect(() => {
     onValue(ref(database), (snapshot) => {
@@ -65,6 +70,7 @@ const Home = () => {
   //Update
   const handleUpdate = (data) => {
     setIsEdit(true);
+    setOpenModal(true);
     setTempUuid(data.uuid);
     setFirstName(data.firstName);
   }
@@ -80,56 +86,87 @@ const Home = () => {
     setFirstName("");
     setLastName("");
     setEmail("");
+    setOpenModal(false);
     setIsEdit(false);
   }
   //Delete
   const handleDelete = (data) => {
     remove(ref(database, `/${data.uuid}`))
-
   }
 
-  console.log(user);
+  const handleOpenModal = () => {
+    setOpenModal(true)
+  }
+
+  const handleReset = () => {
+    setIsEdit(false);
+    setFirstName("");
+    setLastName("");
+    setEmail("");
+    setOpenModal(false);
+  }
+
   return (
-    <div className="Home__container">
+    <div className="Home__container container">
       {
         isLoading
           ?
           <h1>Esta cargando</h1>
           :
           <div className='CRUD'>
-            <div>
-              <input type="text" value={firstName} onChange={handleToChangeFirstName} />
-            </div>
-            <div>
-              <input type="text" value={lastName} onChange={handleToChangeLastName} />
-            </div>
-            <div>
-              <input type="text" value={email} onChange={handleToChangeEmail} />
-            </div>
+            {
+              openModal ? 
+              <ModalCreate 
 
-            {isEdit ? (
-              <div>
-                <button onClick={handleSubmitChange}>Submit Changes</button>
-                <button onClick={() => {
-                  setIsEdit(false);
-                  setFirstName("");
-                }}>X</button>
-              </div>
-            ) : (
-              <button onClick={CreateToDatabase}>Submit</button>
-            )}
-            {contacts.map(contact => (
-              <div key={contact.uuid}>
-                <h1>{contact.firstName}</h1>
-                <button onClick={() => handleUpdate(contact)}>Update</button>
-                <button onClick={() => handleDelete(contact)}>Delete</button>
-              </div>
-            ))}
-            <button onClick={handleSignOut}>Sign Out</button>
-          </div>   
+              handleToChangeFirstName={handleToChangeFirstName}
+              handleToChangeLastName={handleToChangeLastName}
+              handleToChangeEmail={handleToChangeEmail}
+              handleReset={handleReset}
+
+              CreateToDatabase={CreateToDatabase}
+              handleSubmitChange={handleSubmitChange}
+
+              firstName={firstName}
+              lastName={lastName}
+              email={email}
+              isEdit={isEdit}
+              />
+              :
+              <></>
+            }
+
+            <h1>My Contacts</h1>
+            <div className="btn__create">
+              <button className='waves-effect waves-light btn blue' onClick={handleOpenModal}>Create a New Contact</button>
+            </div>
+            <table className='personal__table responsive-table centered striped'>
+              <thead>
+                <tr>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Email Address</th>
+                  <th>Update</th>
+                  <th>Delete</th>
+                </tr>
+              </thead>
+              <tbody>
+                {contacts.map(contact => (
+                  <tr key={contact.uuid}>
+                    <td>{contact.firstName}</td>
+                    <td>{contact.lastName}</td>
+                    <td>{contact.email}</td>
+                    <td><button className='waves-effect waves-light btn #fbc02d yellow darken-2' onClick={() => handleUpdate(contact)}>Update</button></td>
+                    <td><button className='waves-effect waves-light btn #f44336 red' onClick={() => handleDelete(contact)}>Delete</button></td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <div className="logout__btn">
+              <button className='waves-effect waves-light btn #f44336 red' onClick={handleSignOut}>Sign Out</button>
+            </div>
+          </div>
       }
     </div>
-
   )
 }
 
