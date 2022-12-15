@@ -1,0 +1,32 @@
+.Login__container{
+    min-width: 350px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.form__btn{
+    display: flex;
+    justify-content: space-between;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.form__btn__google{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding-top: 20px;
+}
+
+.form__btn__google button {
+    display: flex;
+    gap: 0.5em;
+    margin-bottom: 20px;
+}
+
+.error-panel{
+    padding: 10px;
+    text-align: center;
+    color: white;
+}

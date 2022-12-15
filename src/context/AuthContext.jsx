@@ -33,8 +33,6 @@ export function AuthProvider({ children }) {
     const resetPassword = () => {
         sendPasswordResetEmail(auth, email)
     }
-
-
     useEffect(() => {
         const unsubcribe = onAuthStateChanged(auth, currentUser => {
             setUser(currentUser);
