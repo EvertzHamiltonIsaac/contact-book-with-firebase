@@ -135,7 +135,7 @@ const Home = () => {
               <></>
             }
 
-            <h1>My Contacts</h1>
+            <h1 className='tittle__home card-panel teal lighten-2'>My Contacts</h1>
             <div className="btn__create">
               <button className='waves-effect waves-light btn blue' onClick={handleOpenModal}>Create a New Contact</button>
             </div>
