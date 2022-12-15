@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { uid } from 'uid'
 import ModalCreate from '../components/ModalCreate'
+import ModalEmail from '../components/ModalEmail'
 import { useAuth } from '../context/AuthContext'
 import { database } from '../firebase/firebase'
 import '../styles/home.css'
@@ -26,6 +27,7 @@ const Home = () => {
   //fields
 
   const [openModal, setOpenModal] = useState(false)
+  const [openModalEmail, setOpenModalEmail] = useState(false)
 
   //handleToChanges
   const handleToChangeFirstName = (e) => {
@@ -73,6 +75,8 @@ const Home = () => {
     setOpenModal(true);
     setTempUuid(data.uuid);
     setFirstName(data.firstName);
+    setLastName(data.lastName);
+    setEmail(data.email);
   }
 
   const handleSubmitChange = () => {
@@ -106,6 +110,10 @@ const Home = () => {
     setOpenModal(false);
   }
 
+  const handleOpenModalEmail = () => {
+    setOpenModalEmail(true)
+  }
+
   return (
     <div className="Home__container container">
       {
@@ -134,6 +142,12 @@ const Home = () => {
               :
               <></>
             }
+            {
+              openModalEmail ? 
+              <ModalEmail/>
+              :
+              <></>
+            }
 
             <h1 className='tittle__home card-panel teal lighten-2'>My Contacts</h1>
             <div className="btn__create">
@@ -146,6 +160,7 @@ const Home = () => {
                   <th>Last Name</th>
                   <th>Email Address</th>
                   <th>Update</th>
+                  <th>Send Email</th>
                   <th>Delete</th>
                 </tr>
               </thead>
@@ -155,8 +170,9 @@ const Home = () => {
                     <td>{contact.firstName}</td>
                     <td>{contact.lastName}</td>
                     <td>{contact.email}</td>
-                    <td><button className='waves-effect waves-light btn #fbc02d yellow darken-2' onClick={() => handleUpdate(contact)}>Update</button></td>
-                    <td><button className='waves-effect waves-light btn #f44336 red' onClick={() => handleDelete(contact)}>Delete</button></td>
+                    <td><button className='waves-effect waves-light btn-small #fbc02d yellow darken-2' onClick={() => handleUpdate(contact)}>Update</button></td>
+                    <td><button className='waves-effect waves-light btn-small green' onClick={handleOpenModalEmail}>Send</button></td>
+                    <td><button className='waves-effect waves-light btn-small #f44336 red' onClick={() => handleDelete(contact)}>Delete</button></td>
                   </tr>
                 ))}
               </tbody>

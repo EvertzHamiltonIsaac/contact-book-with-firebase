@@ -16,9 +16,16 @@
 
 .btns__update__modal, 
 .btns__create__modal{
-    margin-top: 10px;
+    margin-top: 15px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding-bottom: 10px;
+}
+
+
+@media (min-width: 680px) {
+    .modal__card{
+        width: 400px;
+    }
 }

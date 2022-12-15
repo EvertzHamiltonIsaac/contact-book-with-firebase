@@ -61,7 +61,6 @@ const Login = () => {
                     <label htmlFor="password">Password</label>
                     <input type="password" name='password' id='Idpassword' placeholder='enter your password' onChange={handleChange} />
                 </div>
-                <a onClick={handleResetPassword}>Forgot Password?</a>
                 <div className="form__btn">
                     <button className='btn waves-effect waves-light z-depth-2'>Sign In</button>
                     <a onClick={handleSendToRegister}>Create Account</a>

@@ -4,3 +4,12 @@
     background-color: white;
     border-radius: 10px;
 }
+
+@media (min-width: 680px) {
+    .Register__container{
+        min-width: 420px;
+        padding: 20px;
+        background-color: white;
+        border-radius: 10px;
+    }
+}

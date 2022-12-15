@@ -30,3 +30,13 @@
     text-align: center;
     color: white;
 }
+
+
+@media (min-width: 680px) {
+    .Login__container{
+        min-width: 420px;
+        padding: 20px;
+        background-color: white;
+        border-radius: 10px;
+    }
+}
