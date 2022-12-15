@@ -11,7 +11,21 @@
     bottom: 0;
     margin: auto;
     border-radius: 10px;
+}
 
+.modal__email__card{
+    padding: 20px;
+    width: 350px;
+    height: 600px;
+    background-color: white;
+    position: absolute;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    border-radius: 10px;
 }
 
 .btns__update__modal, 
@@ -23,6 +37,37 @@
     padding-bottom: 10px;
 }
 
+.modalEmail__btns{
+    margin-top: 10px;
+}
+
+.modalEmail__btn{
+    display: flex;
+    justify-content: end;
+}
+
+.text-area__modal{
+    height: 150px;
+    padding: 10px;
+}
+
+.form__textArea{
+    margin-top: 10px;
+}
+
+.form__name{
+    margin-top: 10px; 
+}
+
+.modalEmail__btns{
+    position: absolute;
+    bottom: 50px;
+}
+.modalEmail__btn{
+    position: absolute;
+    bottom: 50px;
+    right: 30px;
+}
 
 @media (min-width: 680px) {
     .modal__card{

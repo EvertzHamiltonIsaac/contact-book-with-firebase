@@ -110,8 +110,16 @@ const Home = () => {
     setOpenModal(false);
   }
 
-  const handleOpenModalEmail = () => {
+  const handleOpenModalEmail = (data) => {
     setOpenModalEmail(true)
+    setEmail(data.email)
+    setFirstName(data.firstName)
+  }
+
+  const handleCloseModalEmail = () => {
+    setOpenModalEmail(false)
+    setFirstName("")
+    setEmail("")
   }
 
   return (
@@ -144,7 +152,13 @@ const Home = () => {
             }
             {
               openModalEmail ? 
-              <ModalEmail/>
+              <ModalEmail
+
+              handleCloseModalEmail={handleCloseModalEmail}
+
+              firstName={firstName}
+              email={email}
+              />
               :
               <></>
             }
@@ -171,7 +185,7 @@ const Home = () => {
                     <td>{contact.lastName}</td>
                     <td>{contact.email}</td>
                     <td><button className='waves-effect waves-light btn-small #fbc02d yellow darken-2' onClick={() => handleUpdate(contact)}>Update</button></td>
-                    <td><button className='waves-effect waves-light btn-small green' onClick={handleOpenModalEmail}>Send</button></td>
+                    <td><button className='waves-effect waves-light btn-small green' onClick={() => handleOpenModalEmail(contact)}>Send</button></td>
                     <td><button className='waves-effect waves-light btn-small #f44336 red' onClick={() => handleDelete(contact)}>Delete</button></td>
                   </tr>
                 ))}
